@@ -1,6 +1,11 @@
 <?
 //Access Controls
-header('Access-Control-Allow-Origin: https://help.nd.edu');
+$http_origin = $_SERVER['HTTP_ORIGIN'];
+
+if ($http_origin == "https://help.nd.edu" || $http_origin == "https://nddev.service-now.com" || $http_origin == "https://ndtest.service-now.com" || $http_origin == "https://nd.service-now.com")
+{
+    header("Access-Control-Allow-Origin: $http_origin");
+}
 
 //Variable Declaration
 $jsonString = file_get_contents('admin/hours.json');
@@ -48,9 +53,9 @@ if ($adhoc == 'open') {
 } else if ($month == 12 && (($date == 22 && $day == 5)||($date == 23 && ($day == 5 || $day == 1))||($date >= 24))) {
 	$status = "close";
 } else if ($students == 'true' && ((($day == 1 || $day == 2 || $day == 4) && ($hrs > 7 && $hrs < 20)) || ($day == 3 && ($hrs > 7 && $hrs < 20) && $hrs != 12 && (($hrs == 13 && $mins > 29) || ($hrs != 13))) || ($day == 5 && ($hrs > 7 && $hrs < 17)) || ($day == 0 && ($hrs > 14 && $hrs < 20)))){
-	$status = "open";		
+	$status = "open";
 } else if ($students == 'false' && ((($day == 1 || $day == 2 || $day == 4 || $day == 5) && ($hrs > 7 && $hrs < 17)) || ($day == 3 && (($hrs > 7 && $hrs < 17) && $hrs != 12 && (($hrs == 13 && $mins > 29) || $hrs != 13))))){
-	$status = "open";		
+	$status = "open";
 } else {
 	$status = "close";
 }
