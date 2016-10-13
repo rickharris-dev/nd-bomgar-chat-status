@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="%LOCALE_CODE%">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Cache-Control" content="No-Cache">
+	<meta http-equiv="Cache-Control" content="No-Store">
+	<meta http-equiv="Expires" content="Mon, 22 Jul 2002 11:12:01 GMT">
+	<title>OIT Help Desk - Bomgar Hours Admin</title>
+	<link href="https://help.nd.edu/content/appliance.css" rel="stylesheet" type="text/css" />
+	<link href="https://help.nd.edu/content/style.css" rel="stylesheet" type="text/css" />
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="script.js"></script>
+	
+</head>
+<body onload="getStatus();">
+<style type="text/css">
+  body {
+	background-image: url("ndt-bg-blue-gold.png");
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-color: #fff;
+	color: #002b5c;
+  }
+  input[type="button"] {
+	background-image: url("button-bg.png");
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    border: 1px solid #5f6062;
+    border-radius: 7px;
+    color: #333;
+  }
+  div#ambushMessages h1 {
+	background-image: url("bluebarbg.png");
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	background-color: #FFF;
+ 	color:#FFFFFF;
+	}
+  div#sessionKeyBox h1 {
+	background-image: url("bluebarbg.png");
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	background-color: #FFF;
+ 	color:#FFFFFF;
+	}
+
+  div#sessionKeyBox {
+	margin-bottom: 3em;
+	}
+
+  div#issueSubmissionBox h1 {
+	background-image: url("bluebarbg.png");
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	background-color: #FFF;
+ 	color:#FFFFFF;
+
+</style>
+
+<div id="container">
+	<div id="header" class="contentBox" style="border-style:hidden; border-color:transparent; margin-left: 0em;padding-left: 0em; margin-bottom: 0em; padding-bottom: 0em;">
+		<div>
+			<img src="undheader.png" style="position: absolute; top: 18px;">
+		</div>	
+		<div style="margin: 30px 0px 0px 0px;">
+			<p style="text-align: left; line-height: 1.5em; font-family: 'Adobe Garamond Pro', Garamond, Georgia, Times, 'Times New Roman', serif; font-size: 39px; font-weight: normal; text-shadow: 0 1px 0 white;">Bomgar Hours Admin</p>
+		</div>
+	</div>
+	<div id="form">
+		<div class="contentBox" id="issueSubmissionBox-alt" style="display: block;">
+			<h1 class="sectionTitle" style="background-image: url(bluebarbg.png); background-position: 0 0; background-repeat: repeat-x; background-color: #FFF; color:#FFFFFF; padding: 0.4em 1.33em 1.5em">
+				<span>
+					Help Desk Status
+				</span>
+			</h1>
+			<h4 id="currentStatus">Current Setting: Normal Business Hours</h4>
+			<select id="status">
+				<option value="0">Normal Business Hours</option>
+				<option value="1">Adhoc Open</option>
+				<option value="2">Adhoc Close</option>
+			</select> 
+		</div>
+		<div class="contentBox" id="issueSubmissionBox-alt" style="display: block;">
+			<h1 class="sectionTitle" style="background-image: url(bluebarbg.png); background-position: 0 0; background-repeat: repeat-x; background-color: #FFF; color:#FFFFFF; padding: 0.4em 1.33em 1.5em">
+				<span>
+					Coverage Status
+				</span>
+			</h1>
+			<h4 id="currentStudents">Current Setting: Full-time Staff Coverage</h4>
+			<select id="students">
+				<option value="0">Full-time Staff Coverage</option>
+				<option value="1">Extended Student Coverage</option>
+			</select> 
+		</div>
+		<div id="button" style="text-align:center;">
+			<input type="button" value="Update Status" onclick="updateStatus();"/>
+		</div>
+	</div>
+	<div id="result" style="display:none;">
+		<div class="contentBox" id="issueSubmissionBox-alt" style="display: block;">
+			<h1 class="sectionTitle" style="background-image: url(bluebarbg.png); background-position: 0 0; background-repeat: repeat-x; background-color: #FFF; color:#FFFFFF; padding: 0.4em 1.33em 1.5em">
+				<span>
+					Status Updated
+				</span>
+			</h1>
+			<div id="response">
+			</div>
+		</div>
+		<div id="button" style="text-align:center;">
+			<input type="button" value="Back" onclick="refreshStatus();"/>
+		</div>
+	</div>
+<br>
+<hr>
+<div style="float:left;">
+<span><a href="http://nd.edu/copyright/">Copyright</a> © 2015 <a href="http://www.nd.edu">University of Notre 
+
+Dame</a>     <a href ="http://help.nd.edu">Live Remote Assistance</a></span><br />
+<span>Notre Dame, IN 46556     Phone (574) 631-8111     <a href="http://oithelp.nd.edu/help-desk/">Contact 
+
+Us</a></span>
+</div>
+
+<div style="float:right;">
+<a href="http://www.nd.edu" target="_blank">
+ <img src="https://help.nd.edu/files/ndmark.png" />
+</a>
+</div>
+
+</div>
+</body>
+</html>
