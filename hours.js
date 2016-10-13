@@ -164,18 +164,61 @@ function hoursCheck(students, adhoc, day, month, date, year, hour, mins){
 	}
 }
 
+function closeNote(holiday,fallDay){
+	var text = document.getElementById("closureNote");
+	var rText;
+	if(holiday == "hol") {
+		switch(fallDay){
+			case 0:
+				rText = "Tuesday, January 3rd";
+				break;
+			case 1:
+				rText = "Tuesday, January 2nd";
+				break;
+			case 2:
+				rText = "Wednesday, January 2rd";
+				break;
+			case 3:
+				rText = "Thursday, January 2nd";
+				break;
+			case 4:
+				rText = "Monday, January 5th";
+				break;
+			case 5:
+				rText = "Monday, January 4th";
+				break;
+			case 6:
+				rText = "Monday, January 3rd";
+				break;
+			default:
+		}
+		text.innerHTML = "<b>The OIT Help Desk is currently closed for the holidays.</b> We will be back in office on " + rText + ". <br/><br/><b>Have a merry Christmas and a safe and happy New Year!</b> <br/><br/> <div align=\"center\"><img src=\"http://www.nd.edu/assets/features/2012/features/christmas-2014/mobile@2x.jpg\" align=\"center\" height=\"339px\" width=\"320px\"/></div>";
+	} else { }
+}
+
 function openClose(students, adhoc, day, month, date, year, hour, mins){
 	if (month == 0) {
 		if (date == 1) {
+			closeNote("hol",day);
 			return "close";
 		} else if (date == 2) {
 			yesterday = new Date(year,0,1,hour,mins,0);
 			newYear = yesterday.getDay();
 			switch (newYear) {
 				case 0:
+					closeNote("hol",0);
 					return "close";
 					break;
 				case 4:
+					closeNote("hol",4);
+					return "close";
+					break;
+				case 5:
+					closeNote("hol",5);
+					return "close";
+					break;
+				case 6:
+					closeNote("hol",6);
 					return "close";
 					break;
 				default:
@@ -251,7 +294,10 @@ function openClose(students, adhoc, day, month, date, year, hour, mins){
 			return hoursStatus;
 		}
 	} else if (month == 11) {
+		var christmas = new Date(year,11,25,hour,mins,0);
+		var christmasDay = christmas.getDay();
 		if (date >= 24) {
+			closeNote("hol",christmasDay);
 			return "close";
 		} else if (date == 22 || date == 23) {
 			christmas = new Date(year,11,25,hour,mins,0);
@@ -259,6 +305,7 @@ function openClose(students, adhoc, day, month, date, year, hour, mins){
 			switch (christmasDay) {
 				case 0:
 					if (date == 23){
+						closeNote("hol",christmasDay);
 						return "close";
 					} else {
 						var hoursStatus = hoursCheck(students, adhoc, day, month, date, year, hour, mins);
@@ -267,6 +314,7 @@ function openClose(students, adhoc, day, month, date, year, hour, mins){
 					break;
 				case 1:
 					if (date == 22 || date == 23) {
+						closeNote("hol",christmasDay);
 						return "close";
 					} else {
 						var hoursStatus = hoursCheck(students, adhoc, day, month, date, year, hour, mins);
@@ -275,6 +323,7 @@ function openClose(students, adhoc, day, month, date, year, hour, mins){
 					break;
 				case 3:
 					if (date == 23) {
+						closeNote("hol",christmasDay);
 						return "close";
 					} else {
 						var hoursStatus = hoursCheck(students, adhoc, day, month, date, year, hour, mins);
